@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: istio-client
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: istio-client
+  template:
+    metadata:
+      labels:
+        app: istio-client
+    spec:
+      containers:
+      - name: istio-client
+        image: istio-client:v1
+        ports:
+          - containerPort: 8080
+        env:
+        - name: URL_CLIENT_OK
+          valueFrom:
+            configMapKeyRef:
+              key: url_client_ok
+              name: istio-client
+        - name: URL_CLIENT_ERROR
+          valueFrom:
+            configMapKeyRef:
+              key: url_client_error
+              name: istio-client
+        readinessProbe:
+          initialDelaySeconds: 60
+          httpGet:
+            path: /actuator/health
+            port: 8080
+        livenessProbe:
+          initialDelaySeconds: 60
+          timeoutSeconds: 1
+          httpGet:
+            path: /actuator/health
+            port: 8080
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
