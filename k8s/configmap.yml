@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: istio-client
 data:
-  url_client_ok: "istio-server.default.svc.cluster.local/ok"
-  url_client_error: "istio-server.default.svc.cluster.local/error"
+  url_client_ok: "http://istio-server.default.svc.cluster.local/ok"
+  url_client_error: "http://istio-server.default.svc.cluster.local/error"
   
