@@ -9,5 +9,4 @@ public class IstioClientApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IstioClientApplication.class, args);
 	}
-
 }

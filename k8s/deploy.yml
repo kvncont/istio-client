@@ -23,15 +23,25 @@ spec:
         ports:
           - containerPort: 8080
         env:
-        - name: URL_CLIENT_OK
+        - name: URL_SERVICE1_SUCCESS
           valueFrom:
             configMapKeyRef:
-              key: url_client_ok
+              key: url_service1_success
               name: istio-client
-        - name: URL_CLIENT_ERROR
+        - name: URL_SERVICE1_ERROR
           valueFrom:
             configMapKeyRef:
-              key: url_client_error
+              key: url_service1_error
+              name: istio-client
+        - name: URL_SERVICE2_SUCCESS
+          valueFrom:
+            configMapKeyRef:
+              key: url_service2_success
+              name: istio-client
+        - name: URL_SERVICE2_ERROR
+          valueFrom:
+            configMapKeyRef:
+              key: url_service2_error
               name: istio-client
         readinessProbe:
           initialDelaySeconds: 60

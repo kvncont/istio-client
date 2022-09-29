@@ -6,7 +6,7 @@ spec:
   host: istio-client.default.svc.cluster.local
   trafficPolicy:
     outlierDetection:
-      consecutive5xxErrors: 3
+      consecutive5xxErrors: 2
       interval: 15s
       baseEjectionTime: 1m
       maxEjectionPercent: 100
